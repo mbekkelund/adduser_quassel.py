@@ -34,7 +34,7 @@ from bottle import route,run,template,request
 listen="localhost" # what address to listen to
 port=8080 # the port on which this app will run
 quassel_base="/var/lib/quassel/quassel-storage.sqlite" # location of the quassel sqlite-database
-ldap_server="ldap://ldap.example.com" # your ldap-server
+ldap_server='ldap://ldap.example.com' # your ldap-server
 ldap_base="ou=user,ou=internal,dc=example,dc=com" # your ldap base dn
 
 
@@ -61,14 +61,14 @@ def login_submit():
             sys.exit(1)
         c = conn.cursor()
         try: 
-            c.execute("insert into quasseluser values ((select max(userid)+1 from quasseluser),'"+name+"','"+password+"')");
+            c.execute("insert into quasseluser values (NULL,'"+name+"','"+password+"')");
         except:
             c.execute("update quasseluser set password='"+password+"' where userid = \
                 (select userid from quasseluser where username='"+name+"')");
             return "Existing user successfully updated! <a href='http://"+listen+":"+str(port)+"/login'>Back</a>"
         conn.commit()
         conn.close()
-        return "<p>New user successfully added. You can now connect to Quassel.</p>"
+        return "<p>New user successfully added. You can now connect to Quassel.<a href='http://"+listen+":"+str(port)+"/login'>Back</a></p>"
     else:
         return "<p>LDAP-login failed. <a href='http://"+listen+":"+str(port)+"/login'>Back</a></p>"
 
