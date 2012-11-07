@@ -1,4 +1,29 @@
 adduser_quassel.py
 ==================
 
-Simple python bottle script that creates a webform for creating users in a quassel-database. The user logs in using his/her LDAP-credentials, and if the login succeeds, the users info will be stored in quassels sqlite-database.
+
+Simple python bottle script that creates a webform for creating users in a quassel-database. 
+The user logs in using his/her LDAP-credentials, and if the login succeeds, the users info will 
+be stored in quassels sqlite-database.
+
+Requirements: 
+
+ * python
+ * python-bottle
+ * python-ldap
+ * (and ofcourse you need quassel-core installed so you have the database in place)
+
+ Copyright (C) 2012 Morten Bekkelund
+  
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ GNU General Public License for more details.
+  
+ See: http://www.gnu.org/copyleft/gpl.html
+
