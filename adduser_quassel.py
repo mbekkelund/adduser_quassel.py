@@ -61,17 +61,17 @@ def login_submit():
             sys.exit(1)
         c = conn.cursor()
         try: 
-            c.execute("insert into quasseluser values (NULL,'"+name+"','"+password+"')");
+            c.execute("insert into quasseluser values (NULL,'{0}','{1}')".format(name,password));
             conn.commit()
         except:
-            c.execute("update quasseluser set password='"+password+"' where userid = \
-                (select userid from quasseluser where username='"+name+"')");
+            c.execute("update quasseluser set password='{1}' where userid = \
+                (select userid from quasseluser where username='{0}')".format(name,password));
             conn.commit()
-            return "Existing user successfully updated! <a href='http://"+listen+":"+str(port)+"/login'>Back</a>"
+            return "Existing user successfully updated! <a href='http://{0}:{1}/login'>Back</a>".format(listen,port)
         conn.close()
-        return "<p>New user successfully added. You can now connect to Quassel.<a href='http://"+listen+":"+str(port)+"/login'>Back</a></p>"
+        return "<p>New user successfully added. You can now connect to Quassel.<a href='http://{0}:{1}/login'>Back</a></p>".format(listen,port)
     else:
-        return "<p>LDAP-login failed. <a href='http://"+listen+":"+str(port)+"/login'>Back</a></p>"
+        return "<p>LDAP-login failed. <a href='http://{0}:{1}/login'>Back</a></p>".format(listen,port)
 
 def check_login(name, password):
     ''' checking if the user can bind to ldap '''
