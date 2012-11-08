@@ -62,11 +62,12 @@ def login_submit():
         c = conn.cursor()
         try: 
             c.execute("insert into quasseluser values (NULL,'"+name+"','"+password+"')");
+            conn.commit()
         except:
             c.execute("update quasseluser set password='"+password+"' where userid = \
                 (select userid from quasseluser where username='"+name+"')");
+            conn.commit()
             return "Existing user successfully updated! <a href='http://"+listen+":"+str(port)+"/login'>Back</a>"
-        conn.commit()
         conn.close()
         return "<p>New user successfully added. You can now connect to Quassel.<a href='http://"+listen+":"+str(port)+"/login'>Back</a></p>"
     else:
